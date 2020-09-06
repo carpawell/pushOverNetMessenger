@@ -12,7 +12,7 @@ type Server struct {
 }
 
 type Opts struct {
-	Port string
+	Port   string
 	Routes Routes
 }
 

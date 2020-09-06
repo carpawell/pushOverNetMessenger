@@ -18,11 +18,11 @@ func main() {
 
 	go func() {
 		oscall := <-c
-		log.Printf("system call:%+v", oscall)
+		log.Printf("system call: %+v", oscall)
 		cancel()
 	}()
 
 	if err := svc.Start(ctx); err != nil {
-		log.Printf("failed to serve:+%v\n", err)
+		log.Printf("failed to serve: %v\n", err)
 	}
 }

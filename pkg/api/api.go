@@ -2,6 +2,8 @@ package api
 
 import (
 	"context"
+	"github.com/carpawell/pushOverNetMessenger/pkg/constants"
+	"github.com/carpawell/pushOverNetMessenger/pkg/pushApp"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
@@ -9,12 +11,14 @@ import (
 )
 
 type Service struct {
-	Server *Server
-	Router *httprouter.Router
+	Server      *Server
+	Router      *httprouter.Router
+	PushOverApp *pushApp.PushApp
 }
 
 func (svc Service) Start(ctx context.Context) error {
 	svc.Router = httprouter.New()
+	svc.PushOverApp = pushApp.New(constants.App, constants.User)
 	opt := &Opts{Port: "8080", Routes: svc.routes()}
 	svc.Server = NewServer(opt)
 
@@ -33,7 +37,7 @@ func (svc Service) Start(ctx context.Context) error {
 	}()
 
 	if err := svc.Server.Stop(ctxShutDown); err != nil {
-		log.Fatalf("server Shutdown Failed:%s", err)
+		log.Fatalf("server shutdown failed: %s", err)
 		return err
 	}
 
