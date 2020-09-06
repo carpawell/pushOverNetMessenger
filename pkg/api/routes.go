@@ -6,14 +6,24 @@ import (
 )
 
 type Route struct {
+	Method  string
 	Path    string
-	Handler func(http.ResponseWriter, *http.Request, httprouter.Params)
+	Handler httprouter.Handle
 }
 
-var GETRoutes = []Route{
-	{"/messages", GetMessages},
-}
+type Routes = []Route
 
-var POSTRoutes = []Route{
-	{"/messages", SendMessage},
+func (svc Service) routes() []Route {
+	return Routes{
+		{
+			Method:  http.MethodGet,
+			Path:    "/messages",
+			Handler: svc.GetMessages,
+		},
+		{
+			Method:  http.MethodPost,
+			Path:    "/messages",
+			Handler: svc.SendMessage,
+		},
+	}
 }

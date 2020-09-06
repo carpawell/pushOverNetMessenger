@@ -6,10 +6,10 @@ import (
 	"net/http"
 )
 
-func GetMessages(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func (svc Service) GetMessages(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "test")
 }
 
-func SendMessage(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func (svc Service) SendMessage(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "test")
 }

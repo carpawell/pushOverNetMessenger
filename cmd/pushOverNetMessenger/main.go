@@ -2,14 +2,14 @@ package main
 
 import (
 	"context"
-	"github.com/carpawell/pushOverNetMessenger/pkg/service"
+	"github.com/carpawell/pushOverNetMessenger/pkg/api"
 	"log"
 	"os"
 	"os/signal"
 )
 
 func main() {
-	svc := service.Service{}
+	svc := api.Service{}
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
