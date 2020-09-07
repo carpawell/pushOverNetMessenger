@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/carpawell/pushOverNetMessenger/pkg/constants"
 	"github.com/carpawell/pushOverNetMessenger/pkg/pushApp"
+	"github.com/carpawell/pushOverNetMessenger/pkg/storage"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
@@ -14,9 +15,18 @@ type Service struct {
 	Server      *Server
 	Router      *httprouter.Router
 	PushOverApp *pushApp.PushApp
+	Db          *storage.Storage
 }
 
 func (svc Service) Start(ctx context.Context) error {
+	// Connection to database
+	db, err := storage.New()
+	if err != nil {
+		return err
+	}
+
+	// Initializing service
+	svc.Db = db
 	svc.Router = httprouter.New()
 	svc.PushOverApp = pushApp.New(constants.App, constants.User)
 	opt := &Opts{Port: "8080", Routes: svc.routes()}
