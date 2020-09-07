@@ -29,7 +29,7 @@ func (stg *Storage) AddNotification(msg string, sts int) {
 func (stg *Storage) GetMessageStatistics(from *time.Time) *MessagesStatistic {
 	var succeed int64
 	var failed int64
-	stg.Db.Model(&Notification{}).Where("Time > ? AND status = ?", from.Format("2006-01-02 15:04:05"), 1).Count(&succeed)
-	stg.Db.Model(&Notification{}).Where("Time > ? AND status <> ?", from.Format("2006-01-02 15:04:05"), 1).Count(&failed)
+	stg.Db.Model(&Notification{}).Where("Time > ? AND status = ?", from, 1).Count(&succeed)
+	stg.Db.Model(&Notification{}).Where("Time > ? AND status <> ?", from, 1).Count(&failed)
 	return &MessagesStatistic{from, succeed + failed, succeed, failed}
 }
