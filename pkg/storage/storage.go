@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"github.com/carpawell/pushOverNetMessenger/pkg/config"
 	"github.com/carpawell/pushOverNetMessenger/pkg/utils"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -11,9 +12,14 @@ type Storage struct {
 	Db *gorm.DB
 }
 
-func New() (*Storage, error) {
-	dsn := utils.GetDSN()
+func New(cfg *config.Config) (*Storage, error) {
+	dsn := utils.GetDSN(cfg)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+
+	err = db.AutoMigrate(&Notification{})
 	if err != nil {
 		return nil, err
 	}

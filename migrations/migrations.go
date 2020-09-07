@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	dsn := utils.GetDSN()
+	dsn := utils.GetDSN(nil)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("database:%s\n", err)

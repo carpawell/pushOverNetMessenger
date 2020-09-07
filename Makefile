@@ -1,0 +1,45 @@
+buildImage:
+	@docker build . -t pushovernetmessenger
+
+startPostgres:
+	@docker run --name pushoverdb -e POSTGRES_PASSWORD=admin -e POSTGRES_USER=pushover \
+			--network=pushOverNetMessenger \
+			-d postgres
+
+startMessenger:
+	@docker run -p 8080:8080 \
+			-p $(port):$(port) \
+			-e DB_DSN=$(DB_DSN) \
+ 			--name pushovernetmessenger \
+ 			--network=pushOverNetMessenger \
+ 			pushovernetmessenger \
+ 			./pushOverNetMessenger \
+ 			-port=$(port) -app=$(app) -user=$(user)
+
+startMessengerDocker:
+	@docker run -p 8080:8080 \
+ 			--name pushovernetmessenger \
+ 			--network=pushOverNetMessenger \
+ 			pushovernetmessenger \
+ 			./pushOverNetMessenger \
+ 			-port=$(port) -app=$(app) -user=$(user) -host=pushoverdb
+
+run:
+	@docker network create pushOverNetMessenger
+	@make buildImage
+	@make startPostgres
+	@sleep 1
+	@make host=$(host) app=$(app) port=$(port) user=$(user) startMessengerDocker
+
+clean:
+	@make rmImage
+	@make rmPostgres
+	@make rmPush
+	@docker network rm pushOverNetMessenger
+
+rmImage:
+	@docker image rm -f pushovernetmessenger
+rmPostgres:
+	@docker rm -f pushoverdb
+rmPush:
+	@docker rm -f pushovernetmessenger

@@ -11,6 +11,7 @@ type Config struct {
 	Port   *string
 	AppId  *string
 	UserId *string
+	DbHost *string
 }
 
 // Read command line arguments
@@ -19,6 +20,7 @@ func ReadConfig() (*Config, error) {
 	cfg.Port = flag.String("port", "8080", "a port for service")
 	cfg.AppId = flag.String("app", "", "application identifier")
 	cfg.UserId = flag.String("user", "", "user device identifier")
+	cfg.DbHost = flag.String("host", "", "database host")
 
 	flag.Parse()
 

@@ -26,7 +26,7 @@ func (svc Service) Start(ctx context.Context) error {
 	}
 
 	// Connection to database
-	db, err := storage.New()
+	db, err := storage.New(cfg)
 	if err != nil {
 		return err
 	}
