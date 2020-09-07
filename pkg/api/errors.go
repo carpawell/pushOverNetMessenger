@@ -2,4 +2,5 @@ package api
 
 import "errors"
 
-var EmptyMessageError = errors.New("empty message")
+var EmptyMessage = errors.New("empty message")
+var FromParameterNotFound = errors.New("'from' parameter is necessary")

@@ -1,7 +1,7 @@
 package api
 
 type MessageToSend struct {
-	Message *string `json:"message"`
+	Text *string `json:"message"`
 }
 
 type Error struct {

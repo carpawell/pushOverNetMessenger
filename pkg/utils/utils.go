@@ -3,6 +3,7 @@ package utils
 import (
 	"github.com/carpawell/pushOverNetMessenger/pkg/constants"
 	"os"
+	"time"
 )
 
 func GetDSN() string {
@@ -13,4 +14,12 @@ func GetDSN() string {
 	}
 
 	return envDSN
+}
+
+func ParseTime(str string) (*time.Time, error) {
+	parsedTime, err := time.Parse(constants.TimeLayout, str)
+	if err != nil {
+		return nil, err
+	}
+	return &parsedTime, nil
 }

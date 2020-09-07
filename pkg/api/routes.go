@@ -17,8 +17,8 @@ func (svc Service) routes() []Route {
 	return Routes{
 		{
 			Method:  http.MethodGet,
-			Path:    "/messages",
-			Handler: svc.GetMessages,
+			Path:    "/messages/statistics",
+			Handler: svc.GetMessagesCount,
 		},
 		{
 			Method:  http.MethodPost,
