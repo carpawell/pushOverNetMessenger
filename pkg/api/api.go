@@ -2,7 +2,7 @@ package api
 
 import (
 	"context"
-	"github.com/carpawell/pushOverNetMessenger/pkg/constants"
+	"github.com/carpawell/pushOverNetMessenger/pkg/config"
 	"github.com/carpawell/pushOverNetMessenger/pkg/pushApp"
 	"github.com/carpawell/pushOverNetMessenger/pkg/storage"
 	"github.com/julienschmidt/httprouter"
@@ -16,9 +16,15 @@ type Service struct {
 	Router      *httprouter.Router
 	PushOverApp *pushApp.PushApp
 	Db          *storage.Storage
+	Config      *config.Config
 }
 
 func (svc Service) Start(ctx context.Context) error {
+	cfg, err := config.ReadConfig()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	// Connection to database
 	db, err := storage.New()
 	if err != nil {
@@ -26,10 +32,11 @@ func (svc Service) Start(ctx context.Context) error {
 	}
 
 	// Initializing service
+	svc.Config = cfg
 	svc.Db = db
 	svc.Router = httprouter.New()
-	svc.PushOverApp = pushApp.New(constants.App, constants.User)
-	opt := &Opts{Port: "8080", Routes: svc.routes()}
+	svc.PushOverApp = pushApp.New(*cfg.AppId, *cfg.UserId)
+	opt := &Opts{Port: *cfg.Port, Routes: svc.routes()}
 	svc.Server = NewServer(opt)
 
 	go func() {
