@@ -13,11 +13,11 @@ func main() {
 	dsn := utils.GetDSN(nil)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatalf("database:%s\n", err)
+		log.Fatalf("database: %s\n", err)
 	}
 
 	err = db.AutoMigrate(&storage.Notification{})
 	if err != nil {
-		log.Fatalf("migrations:%s\n", err)
+		log.Fatalf("migrations: %s\n", err)
 	}
 }
