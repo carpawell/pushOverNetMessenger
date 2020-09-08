@@ -16,7 +16,7 @@ startMessenger:
  			-port=$(port) -app=$(app) -user=$(user)
 
 startMessengerDocker:
-	@docker run -p 8080:8080 \
+	@docker run -p $(port):$(port) \
  			--name pushovernetmessenger \
  			--network=pushOverNetMessenger \
  			pushovernetmessenger \

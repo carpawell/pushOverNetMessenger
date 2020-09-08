@@ -7,8 +7,7 @@
 $ make port=[yourPortForApp] app=[yourAppId] user=[yourUserDeviceId] run
 ```
 
-- `app` and `user` **required**
-- `port` optional
+- `app`, `port` and `user` **required**
 
 *After such demo-start everything can be deleted with:*
 ```
@@ -26,8 +25,7 @@ $ make DB_DSN=[...] \
        user=[...] startMessenger
 ```
 
-- `DB_DSN`, `DBPort`, `app`, `user` are required
-- `port` is optional
+- All arguments **required**
 
 *Theoretically it will work.*
 
