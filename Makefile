@@ -30,7 +30,7 @@ run:
 	@docker network create pushOverNetMessenger
 	@make buildImage
 	@make startPostgres
-	@sleep 1
+	@sleep 5
 	@make host=$(host) app=$(app) port=$(port) user=$(user) startMessengerDocker
 
 clean:
