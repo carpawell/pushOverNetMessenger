@@ -13,6 +13,7 @@ RUN go mod download
 
 COPY . .
 
+RUN mkdir dist
 RUN go build -o ./dist ./cmd/pushOverNetMessenger
 
 WORKDIR ./dist
