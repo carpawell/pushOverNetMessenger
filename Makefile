@@ -11,7 +11,6 @@ startMessenger:
 			-p $(DBPort):$(DBPort) \
 			-e DB_DSN=$(DB_DSN) \
  			--name pushovernetmessenger \
- 			--network=pushOverNetMessenger \
  			pushovernetmessenger \
  			./pushOverNetMessenger \
  			-port=$(port) -app=$(app) -user=$(user)
