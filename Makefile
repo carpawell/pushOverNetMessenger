@@ -7,8 +7,8 @@ startPostgres:
 			-d postgres
 
 startMessenger:
-	@docker run -p 8080:8080 \
-			-p $(port):$(port) \
+	@docker run -p $(port):$(port) \
+			-p $(DBPort):$(DBPort) \
 			-e DB_DSN=$(DB_DSN) \
  			--name pushovernetmessenger \
  			--network=pushOverNetMessenger \
@@ -23,6 +23,9 @@ startMessengerDocker:
  			pushovernetmessenger \
  			./pushOverNetMessenger \
  			-port=$(port) -app=$(app) -user=$(user) -host=pushoverdb
+
+build:
+	@go build ./
 
 run:
 	@docker network create pushOverNetMessenger
