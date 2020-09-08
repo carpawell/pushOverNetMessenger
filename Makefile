@@ -25,7 +25,7 @@ startMessengerDocker:
  			-port=$(port) -app=$(app) -user=$(user) -host=pushoverdb
 
 build:
-	@go build ./
+	@go build -o ./dist/ ./cmd/pushOverNetMessenger
 
 run:
 	@docker network create pushOverNetMessenger

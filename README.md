@@ -34,7 +34,7 @@ $ make DB_DSN=[...] \
 
 ## Build app:
 1. Set `DB_DSN` env variable of your DB
-2. Build app: ```$ go build -o ./dist ./cmd/pushOverNetMessenger```
+2. Build app: ```$ make build```
 3. Run app with required(**_app_, _user_**) arguments: 
 ```
 $ ./dist/pushOverNetMessenger app=[...] user=[...] port=[...]
