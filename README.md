@@ -37,7 +37,7 @@ $ make DB_DSN=[...] \
 2. Build app: ```$ make build```
 3. Run app with required(**_app_, _user_**) arguments: 
 ```
-$ ./dist/pushOverNetMessenger app=[...] user=[...] port=[...]
+$ ./dist/pushOverNetMessenger -app=[...] -user=[...] -port=[...]
 ```
 
 
