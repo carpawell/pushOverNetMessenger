@@ -12,6 +12,7 @@ type Storage struct {
 	Db *gorm.DB
 }
 
+// Creating connection to DataBase && auto migration
 func New(cfg *config.Config) (*Storage, error) {
 	dsn := utils.GetDSN(cfg)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -27,11 +28,13 @@ func New(cfg *config.Config) (*Storage, error) {
 	return &Storage{Db: db}, nil
 }
 
+// Add notification to DB
 func (stg *Storage) AddNotification(msg string, sts int) {
 	ntf := Notification{Message: msg, Status: sts, Time: time.Now()}
 	stg.Db.Create(ntf)
 }
 
+// Get statistics for messages that are older then `from` argument
 func (stg *Storage) GetMessageStatistics(from *time.Time) *MessagesStatistic {
 	var succeed int64
 	var failed int64

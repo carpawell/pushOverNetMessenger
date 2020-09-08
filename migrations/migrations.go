@@ -8,6 +8,7 @@ import (
 	"log"
 )
 
+// Migration if needed. Not Part of application. Reading DB_DSN env.
 func main() {
 	dsn := utils.GetDSN(nil)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})

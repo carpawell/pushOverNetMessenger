@@ -29,6 +29,7 @@ func NewServer(opt *Opts) *Server {
 	return srv
 }
 
+// Start listening
 func (srv Server) Start() error {
 	return srv.Server.ListenAndServe()
 }

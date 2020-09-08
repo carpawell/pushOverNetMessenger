@@ -23,6 +23,7 @@ func (svc Service) Start(ctx context.Context) error {
 	cfg, err := config.ReadConfig()
 	if err != nil {
 		log.Fatal(err.Error())
+		return err
 	}
 
 	// Connection to database
@@ -48,6 +49,7 @@ func (svc Service) Start(ctx context.Context) error {
 	log.Printf("server started")
 	<-ctx.Done()
 
+	// Context for Shutdown
 	ctxShutDown, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer func() {
 		cancel()

@@ -7,6 +7,7 @@ type PushApp struct {
 	Recipient *pushover.Recipient
 }
 
+// Initializing pushOverNet entity
 func New(token string, user string) *PushApp {
 	return &PushApp{
 		App:       pushover.New(token),

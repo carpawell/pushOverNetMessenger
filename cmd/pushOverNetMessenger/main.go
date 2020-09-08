@@ -9,8 +9,10 @@ import (
 )
 
 func main() {
+	// Main service
 	svc := api.Service{}
 
+	// Chanel for OS interruptions
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 
@@ -18,7 +20,7 @@ func main() {
 
 	go func() {
 		oscall := <-c
-		log.Printf("system call: %+v", oscall)
+		log.Printf("system call: %v", oscall)
 		cancel()
 	}()
 
