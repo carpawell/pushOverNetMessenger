@@ -2,7 +2,7 @@
 
 
 ## Run everything in Docker:
-*App and PostgresSQL start in Docker containers:*
+*App and PostgreSQL start in Docker containers:*
 ```
 $ make port=[yourPortForApp] app=[yourAppId] user=[yourUserDeviceId] run
 ```
